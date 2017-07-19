@@ -4,4 +4,5 @@ puts 'What\'s your middle name?'
 middleName = gets.chomp
 puts 'What\'s your last name?'
 lastName = gets.chomp
-puts 'Hello, ' + firstName.to_s + ' ' + middleName.to_s + ' ' + lastName.to_s + '.'
+# puts 'Hello, ' + firstName.to_s + ' ' + middleName.to_s + ' ' + lastName.to_s + '.'
+puts "Hello, #{firstName} #{middleName} #{lastName}."
