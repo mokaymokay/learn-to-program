@@ -16,7 +16,7 @@ while not_sorted
       words_list[i], words_list[i + 1] = words_list[i + 1], words_list[i]
       not_sorted = true
     end
+  end
 end
 
-puts array
-end
+puts words_list
