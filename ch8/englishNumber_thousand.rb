@@ -2,7 +2,7 @@
 # version, i.e. it turns 22 into twenty-two. It will return 'one thousand'
 # instead of 'ten hundred' and 'ten thousand' instead of 'one hundred hundred'.
 
-def englishNumber number
+def englishNumber(number)
   if number < 0
     return 'Please enter a number that isn\'t negative.'
   end
@@ -49,7 +49,7 @@ def englishNumber number
   whatsLeft = whatsLeft - toWrite*10
 
   if toWrite > 0
-    if ((toWrite == 1)) and ((whatsLeft > 0))
+    if (toWrite == 1) and (whatsLeft > 0)
       numString = numString + teenagers[whatsLeft-1]
       whatsLeft = 0
     else
@@ -72,3 +72,5 @@ def englishNumber number
 end
 
 puts englishNumber(1234)
+puts englishNumber(12345)
+puts englishNumber(123456)
