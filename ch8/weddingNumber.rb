@@ -60,11 +60,13 @@ def englishNumber(number)
     elsif (toWrite == 1) and (whatsLeft > 0)
       numString = numString + teenagers[whatsLeft-1]
       whatsLeft = 0
-    else
+    elsif numString != ''
       numString = numString + 'and ' + tensPlace[toWrite-1]
+    else
+      numString = numString + tensPlace[toWrite-1]
     end
     if whatsLeft > 0
-      numString = numString + ' '
+      numString = numString + '-'
     end
   end
 
@@ -85,4 +87,5 @@ puts englishNumber(11)
 puts englishNumber(111)
 puts englishNumber(1111)
 puts englishNumber(1011)
+puts englishNumber(1031)
 puts englishNumber(1001)
