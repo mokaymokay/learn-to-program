@@ -21,6 +21,18 @@ def englishNumber(number)
     'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen',
     'sixteen', 'seventeen', 'eighteen', 'nineteen']
 
+    whatsLeft = number
+    toWrite = whatsLeft/1000000000
+    whatsLeft = whatsLeft - toWrite*1000000000
+
+    if toWrite > 0
+      billions = englishNumber(toWrite)
+      numString = numString + billions + ' billion'
+      if whatsLeft > 0
+        numString = numString + ' '
+      end
+    end
+
   whatsLeft = number
   toWrite = whatsLeft/1000000
   whatsLeft = whatsLeft - toWrite*1000000
@@ -35,6 +47,17 @@ def englishNumber(number)
 
   toWrite = whatsLeft/1000
   whatsLeft = whatsLeft - toWrite*1000
+
+  if toWrite > 0
+    thousands = englishNumber(toWrite)
+    numString = numString + thousands + ' thousand'
+    if whatsLeft > 0
+      numString = numString + ' '
+    end
+  end
+
+  toWrite = whatsLeft/100
+  whatsLeft = whatsLeft - toWrite*100
 
   if toWrite > 0
     hundreds = englishNumber(toWrite)
@@ -73,3 +96,5 @@ end
 puts englishNumber(1234)
 puts englishNumber(12345)
 puts englishNumber(123456)
+puts englishNumber(1234567)
+puts englishNumber(1234567890)
