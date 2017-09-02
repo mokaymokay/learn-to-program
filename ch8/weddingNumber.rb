@@ -69,7 +69,7 @@ def weddingNumber(number)
       numString = numString + tensPlace[toWrite-1]
     end
     if whatsLeft > 0
-      numString = numString + '-'
+      numString = numString + ' '
     end
   end
 
