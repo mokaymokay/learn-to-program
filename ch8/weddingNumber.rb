@@ -1,8 +1,11 @@
-# This method can write numbers like they are supposed to be written in
-# wedding invitations, up to the thousandths, i.e. 'nineteen hundred and
-# seventy and two.'
+# The weddingNumber method takes in an integer as an argument,
+# and outputs a wedding format in English.
 
-def englishNumber(number)
+# eg number = 1972
+# weddingNumber(number)
+# => 'nineteen hundred and seventy and two'
+
+def weddingNumber(number)
   if number < 0
     return 'Please enter a number that isn\'t negative.'
   end
@@ -27,7 +30,7 @@ def englishNumber(number)
   whatsLeft = whatsLeft - toWrite*1000
 
   if toWrite > 0
-    thousands = englishNumber(toWrite)
+    thousands = weddingNumber(toWrite)
     numString = numString + thousands + ' thousand'
     if whatsLeft > 0
       numString = numString + ' '
@@ -36,7 +39,7 @@ def englishNumber(number)
 
   toWrite = whatsLeft/100
   whatsLeft = whatsLeft - toWrite*100
-  hundreds = englishNumber(toWrite)
+  hundreds = weddingNumber(toWrite)
 
   if (toWrite > 0) and (numString != '')
     numString = numString + 'and ' + hundreds + ' hundred'
@@ -83,9 +86,9 @@ def englishNumber(number)
 
 end
 
-puts englishNumber(11)
-puts englishNumber(111)
-puts englishNumber(1111)
-puts englishNumber(1011)
-puts englishNumber(1031)
-puts englishNumber(1001)
+puts weddingNumber(11)
+puts weddingNumber(111)
+puts weddingNumber(1111)
+puts weddingNumber(1011)
+puts weddingNumber(1031)
+puts weddingNumber(1001)
