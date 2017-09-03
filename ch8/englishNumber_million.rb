@@ -4,8 +4,7 @@
 def englishNumber(number)
   if number < 0
     return 'Please enter a number that isn\'t negative.'
-  end
-  if number == 0
+  elsif number == 0
     return 'zero'
   end
 
@@ -22,58 +21,15 @@ def englishNumber(number)
     'sixteen', 'seventeen', 'eighteen', 'nineteen']
 
   whatsLeft = number
-  toWrite = whatsLeft/1000000000000
-  whatsLeft = whatsLeft - toWrite*1000000000000
 
-  if toWrite > 0
-    trillions = englishNumber(toWrite)
-    numString = numString + trillions + ' trillion'
-    if whatsLeft > 0
-      numString = numString + ' '
-    end
-  end
+  until whatsLeft.to_s.length <= 2
+    suffix = num_to_suffix(whatsLeft)
 
-  toWrite = whatsLeft/1000000000
-  whatsLeft = whatsLeft - toWrite*1000000000
-
-  if toWrite > 0
-    billions = englishNumber(toWrite)
-    numString = numString + billions + ' billion'
-    if whatsLeft > 0
-      numString = numString + ' '
-    end
-  end
-
-  toWrite = whatsLeft/1000000
-  whatsLeft = whatsLeft - toWrite*1000000
-
-  if toWrite > 0
-    millions = englishNumber(toWrite)
-    numString = numString + millions + ' million'
-    if whatsLeft > 0
-      numString = numString + ' '
-    end
-  end
-
-  toWrite = whatsLeft/1000
-  whatsLeft = whatsLeft - toWrite*1000
-
-  if toWrite > 0
-    thousands = englishNumber(toWrite)
-    numString = numString + thousands + ' thousand'
-    if whatsLeft > 0
-      numString = numString + ' '
-    end
-  end
-
-  toWrite = whatsLeft/100
-  whatsLeft = whatsLeft - toWrite*100
-
-  if toWrite > 0
-    hundreds = englishNumber(toWrite)
-    numString = numString + hundreds + ' hundred'
-    if whatsLeft > 0
-      numString = numString + ' '
+    toWrite = break_into_first_suffix(whatsLeft)[0]
+    whatsLeft = break_into_first_suffix(whatsLeft)[1]
+    if toWrite > 0
+      numString = numString + englishNumber(toWrite) + ' ' + suffix
+      numString += ' ' if whatsLeft > 0
     end
   end
 
@@ -87,9 +43,8 @@ def englishNumber(number)
     else
       numString = numString + tensPlace[toWrite-1]
     end
-    if whatsLeft > 0
-      numString = numString + '-'
-    end
+    numString += '-' if whatsLeft > 0
+
   end
 
   toWrite = whatsLeft
@@ -100,12 +55,54 @@ def englishNumber(number)
   end
 
   return numString
-
 end
 
-puts englishNumber(1234)
-puts englishNumber(12345)
+def num_to_suffix(number)
+  dictionary = {
+    'trillion' => (12..14).to_a,
+    'billion' => (9..11).to_a,
+    'million' => (6..8).to_a,
+    'thousand' => (3..5).to_a, #[3, 4, 5]
+    'hundred' => [2]
+  }
+
+  correct_string = ""
+
+  dictionary.each do |key, value|
+    correct_string = key if value.include?(number.to_s.length-1)
+  end
+
+  return correct_string
+end
+
+def break_into_first_suffix(number)
+  seperation_mapping = [
+    [2,3],[3,4,5,6],[6,7,8,9]
+  ]
+
+  break_point = nil
+  return number if number.to_s.length <= 2
+  seperation_mapping.each do |set|
+    if set.include?(number.to_s.length)
+      break_point = set[0]
+      break
+    end
+  end
+
+  solution = number.to_s.split('')
+  break_point.times do
+    solution.pop
+  end
+
+  a = number.to_s
+  a.slice!(solution.join)
+
+  return [solution.join.to_i, a.to_i]
+end
+
+# puts englishNumber(1234)
 puts englishNumber(123456)
-puts englishNumber(1234567)
-puts englishNumber(1234567890)
-puts englishNumber(1234567890123)
+# puts englishNumber(123456)
+# puts englishNumber(1234567)
+# puts englishNumber(1234567890)
+# puts englishNumber(1234567890123)
