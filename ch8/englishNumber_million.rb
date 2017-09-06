@@ -1,64 +1,72 @@
-# This program takes an integer written in digits and returns its English
-# version. It is an extension from englishNumber_thousand.rb to include millions.
+# The method takes in an integer as an argument and outputs it in English, up
+# to the quintillionth place.
 
-def englishNumber(number)
+# eg number = 12345678901234567890
+# english_number(number)
+# => 'twelve quintillion three hundred forty-five quadrillion six hundred
+# seventy-eight trillion nine hundred one billion two hundred thirty-four
+# million five hundred sixty-seven thousand eight hundred ninety'
+
+def english_number(number)
   if number < 0
     return 'Please enter a number that isn\'t negative.'
   elsif number == 0
     return 'zero'
   end
 
-  numString = ''
+  num_string = ''
 
-  onesPlace = [
+  ones_place = [
     'one', 'two', 'three', 'four', 'five',
     'six', 'seven', 'eight', 'nine']
-  tensPlace = [
+  tens_place = [
     'ten', 'twenty', 'thirty', 'forty', 'fifty',
     'sixty', 'seventy', 'eighty', 'ninety']
   teenagers = [
     'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen',
     'sixteen', 'seventeen', 'eighteen', 'nineteen']
 
-  whatsLeft = number
+  whats_left = number
 
-  until whatsLeft.to_s.length <= 2
-    suffix = num_to_suffix(whatsLeft)
+  until whats_left.to_s.length <= 2
+    suffix = num_to_suffix(whats_left)
 
-    toWrite = break_into_first_suffix(whatsLeft)[0]
-    whatsLeft = break_into_first_suffix(whatsLeft)[1]
-    if toWrite > 0
-      numString = numString + englishNumber(toWrite) + ' ' + suffix
-      numString += ' ' if whatsLeft > 0
+    to_write = break_into_first_suffix(whats_left)[0]
+    whats_left = break_into_first_suffix(whats_left)[1]
+    if to_write > 0
+      num_string = num_string + english_number(to_write) + ' ' + suffix
+      num_string += ' ' if whats_left > 0
     end
   end
 
-  toWrite = whatsLeft/10
-  whatsLeft = whatsLeft - toWrite*10
+  to_write = whats_left/10
+  whats_left = whats_left - to_write*10
 
-  if toWrite > 0
-    if (toWrite == 1) and (whatsLeft > 0)
-      numString = numString + teenagers[whatsLeft-1]
-      whatsLeft = 0
+  if to_write > 0
+    if (to_write == 1) and (whats_left > 0)
+      num_string = num_string + teenagers[whats_left-1]
+      whats_left = 0
     else
-      numString = numString + tensPlace[toWrite-1]
+      num_string = num_string + tens_place[to_write-1]
     end
-    numString += '-' if whatsLeft > 0
+    num_string += '-' if whats_left > 0
 
   end
 
-  toWrite = whatsLeft
-  whatsLeft = 0
+  to_write = whats_left
+  whats_left = 0
 
-  if toWrite > 0
-    numString = numString + onesPlace[toWrite-1]
+  if to_write > 0
+    num_string = num_string + ones_place[to_write-1]
   end
 
-  return numString
+  return num_string
 end
 
 def num_to_suffix(number)
-  dictionary = {
+  big_numbers = {
+    'quintillion' => (18..20).to_a,
+    'quadrillion' => (15..17).to_a,
     'trillion' => (12..14).to_a,
     'billion' => (9..11).to_a,
     'million' => (6..8).to_a,
@@ -68,7 +76,7 @@ def num_to_suffix(number)
 
   correct_string = ""
 
-  dictionary.each do |key, value|
+  big_numbers.each do |key, value|
     correct_string = key if value.include?(number.to_s.length-1)
   end
 
@@ -77,7 +85,7 @@ end
 
 def break_into_first_suffix(number)
   seperation_mapping = [
-    [2,3],[3,4,5,6],[6,7,8,9]
+    [2,3],[3,4,5,6],[6,7,8,9],[9,10,11,12],[12,13,14,15],[15,16,17,18],[18,19,20,21]
   ]
 
   break_point = nil
@@ -100,9 +108,9 @@ def break_into_first_suffix(number)
   return [solution.join.to_i, a.to_i]
 end
 
-# puts englishNumber(1234)
-puts englishNumber(123456)
-# puts englishNumber(123456)
-# puts englishNumber(1234567)
-# puts englishNumber(1234567890)
-# puts englishNumber(1234567890123)
+puts english_number(1234)
+puts english_number(123456)
+puts english_number(123456)
+puts english_number(1234567)
+puts english_number(1234567890)
+puts english_number(12345678901234567890)
