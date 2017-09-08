@@ -113,8 +113,8 @@ def break_into_first_suffix(number)
   return [solution.join.to_i, whats_left.to_i]
 end
 
-puts english_number(1234)
-puts english_number(123456)
-puts english_number(1234567)
-puts english_number(1234567890)
-puts english_number(12345678901234567890)
+# puts english_number(1234)
+# puts english_number(123456)
+# puts english_number(1234567)
+# puts english_number(1234567890)
+# puts english_number(12345678901234567890)
