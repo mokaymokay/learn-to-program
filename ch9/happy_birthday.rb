@@ -9,11 +9,11 @@ puts 'What day were you born?'
 day = gets.chomp
 
 now = Time.new
-secondsAlive = Time.new - Time.mktime(year, month, day)
-birthdayInYears = secondsAlive/(60*60*24*365)
+seconds_alive = Time.new - Time.mktime(year, month, day)
+birthday_in_years = seconds_alive/(60*60*24*365)
 
-puts "You\'re #{birthdayInYears.to_i} years old!"
+puts "You\'re #{birthday_in_years.to_i} years old! You deserve #{birthday_in_years.to_i} spanks!"
 
-(birthdayInYears.to_i).times do
+(birthday_in_years.to_i).times do
   puts 'SPANK!'
 end
