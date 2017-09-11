@@ -1,15 +1,36 @@
 # This program displays the song 99 Bottles of Beer with two tweaks:
 # 1) starts at 9999 bottles and 2) written in English instead of numerically.
 
-require_relative "englishNumber_million.rb"
+require_relative "english_number_quintillion.rb"
 
 number = 9999
+original_number = number
 
-while number > 2
-  puts englishNumber(number).capitalize + " bottles of beer on the wall, " + englishNumber(number) + " bottles of beer. \nTake one down and pass it around, " + englishNumber(number - 1) + " bottles of beer on the wall."
+def bottles(number)
+  case number
+    when 0
+      return "no more bottles"
+    when 1
+      return " bottle"
+    else
+      return " bottles"
+    end
+  end
+
+number.downto(0) do |number|
+  if number > 1
+    puts english_number(number).capitalize + "#{bottles(number)}" +
+    " of beer on the wall, " + english_number(number) + "#{bottles(number)}" + " of beer.
+    Take one down and pass it around, " + english_number(number - 1) +
+    "#{bottles(number - 1)} of beer on the wall."
   number -= 1
+  elsif number > 0
+    puts english_number(number).capitalize + "#{bottles(number)}" +
+    " of beer on the wall, " + english_number(number) + "#{bottles(number)}" + " of beer.
+    Take one down and pass it around, " + "#{bottles(number - 1)} of beer on the wall."
+  elsif number == 0
+    puts "#{bottles(number)}".capitalize + " of beer on the wall, " + "#{bottles(number)}" + " of beer.
+    Go to the store and buy some more, " + english_number(original_number) +
+    "#{bottles(original_number)} of beer on the wall."
+  end
 end
-
-puts "Two bottles of beer on the wall, two bottles of beer. \nTake one down and pass it around, one more bottle of beer on the wall."
-puts "One bottle of beer on the wall, one bottle of beer. \nTake one down and pass it around, no more bottles of beer on the wall."
-puts "No more bottles of beer on the wall, no more bottles of beer. \nGo to the store and buy some more, nine thousand nine hundred ninty-nine bottles of beer on the wall."
