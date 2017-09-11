@@ -17,20 +17,23 @@ def bottles(number)
     end
   end
 
+beer_mid = " of beer on the wall, "
+beer_end = " of beer on the wall."
+pass_around = " of beer. Take one down and pass it around, "
+
 number.downto(0) do |number|
   if number > 1
     puts english_number(number).capitalize + "#{bottles(number)}" +
-    " of beer on the wall, " + english_number(number) + "#{bottles(number)}" + " of beer.
-    Take one down and pass it around, " + english_number(number - 1) +
-    "#{bottles(number - 1)} of beer on the wall."
+    beer_mid + english_number(number) + "#{bottles(number)}" + pass_around +
+    english_number(number - 1) + "#{bottles(number - 1)}" + beer_end
   number -= 1
   elsif number > 0
     puts english_number(number).capitalize + "#{bottles(number)}" +
-    " of beer on the wall, " + english_number(number) + "#{bottles(number)}" + " of beer.
-    Take one down and pass it around, " + "#{bottles(number - 1)} of beer on the wall."
+    beer_mid + english_number(number) + "#{bottles(number)}" + pass_around +
+    "#{bottles(number - 1)}" + beer_end
   elsif number == 0
-    puts "#{bottles(number)}".capitalize + " of beer on the wall, " + "#{bottles(number)}" + " of beer.
-    Go to the store and buy some more, " + english_number(original_number) +
-    "#{bottles(original_number)} of beer on the wall."
+    puts "#{bottles(number)}".capitalize + beer_mid + "#{bottles(number)}" +
+    pass_around + english_number(original_number) +
+    "#{bottles(original_number)}" + beer_end
   end
 end
