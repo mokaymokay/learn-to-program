@@ -5,3 +5,20 @@
 # Time.now.hour to get the current hour. However, this returns a number between
 # 0 and 23, so you will have to alter those numbers in order to get ordinary
 # clock-face numbers (1 to 12).
+
+class Fixnum
+  def grandfather_clock(number)
+    number.times do
+      puts "DONG!"
+    end
+  end
+end
+
+hours_passed = Time.now.hour
+  if hours_passed > 12
+    hours_passed -= 12
+  else
+    hours_passed
+  end
+
+520.grandfather_clock(hours_passed)
